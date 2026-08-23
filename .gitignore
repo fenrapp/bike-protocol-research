@@ -1,0 +1,15 @@
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+*.log
+
+# Local captures and private notes should never be committed by accident.
+captures/
+private/
+secrets/
+*.pcap
+*.pcapng
+
