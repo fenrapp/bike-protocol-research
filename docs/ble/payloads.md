@@ -207,9 +207,25 @@ This is a bitmap with one little-endian bit per cell group. Only the first 100 b
 
 ## `6009` Battery Signals
 
-Status: `Observed`
+Status: `Inferred`
 
-Contains BMS signal candidates, including an observed signed value that may relate to current. Units and semantics are not validated. Keep as raw capture data until controlled tests prove the scale.
+Required length: 18 bytes.
+
+| Offset | Field | Type | Unit |
+| --- | --- | --- | --- |
+| 0 | Positive-side voltage candidate | `UInt16` | Raw |
+| 2 | Positive-side temperature candidate | `UInt16` | Candidate C x 100 |
+| 4 | Positive-side humidity candidate | `UInt16` | Candidate percent x 100 |
+| 6 | Positive-side control flags | `UInt16` | Raw |
+| 8 | Negative-side voltage candidate | `UInt16` | Raw |
+| 10 | Negative-side temperature candidate | `UInt16` | Candidate C x 100 |
+| 12 | Negative-side humidity candidate | `UInt16` | Candidate percent x 100 |
+| 14 | Negative-side control flags | `UInt16` | Raw |
+| 16 | Battery-current candidate | `Int16` | Candidate A, direct |
+
+An anonymized motion sequence showed the signed candidate at zero while stationary, positive while the motor accelerated, and negative while it decelerated. This supports little-endian signed decoding and tentatively supports one ampere per count, but it is not an independent current measurement.
+
+The two voltage candidates are complementary. Their raw sum stayed near `805...814` while the validated `6004` bus stayed near `387...388 V`. The ratio is close to `0.48 V/count`, but the scale and physical meaning remain unvalidated. Do not reuse the `6004` `/10` scale for these fields.
 
 ## `7003` Inverter Temperatures
 
@@ -222,4 +238,3 @@ Required length: 16 bytes.
 | 0 | 8 temperature values | `UInt16[8]` | C x 10 |
 
 `0` means sensor unavailable in observed data. Physical labels for the eight positions are not validated.
-

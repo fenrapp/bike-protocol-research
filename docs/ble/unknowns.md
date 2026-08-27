@@ -6,8 +6,9 @@ This file lists what should not be treated as product-ready.
 
 | Area | UUID | Current State | Needed Validation |
 | --- | --- | --- | --- |
-| Traction current | `6009`, `7002`, or TLV | Unknown | Controlled captures while riding, coasting, charging, and stationary. |
-| Instant power | Unknown | Unknown | Identify real traction current before calculating power. |
+| Traction current | `6009` offset 16 | Inferred | Compare against an external current measurement or validated charger output at multiple currents. |
+| Instant power | `6004` x `6009` candidate | Inferred | Validate the current scale before presenting the result as measured power. |
+| BMS voltage candidates | `6009` offsets 0 and 8 | Inferred | Compare with simultaneous sums of `6007` cell groups `0...49` and `50...99`. |
 | Trip counters | `2005` | Partly validated | Compare all four counters against known ride/reset states. |
 | Range/time/power estimate | `2006` | Unknown | Capture at different SOC levels and compare with displayed range/time. |
 | Racing/mode metadata | `2007` | Unknown | Capture while changing configured maps and racing modes. |
@@ -30,7 +31,7 @@ For each new field:
 
 ## Do Not Infer Yet
 
-- Do not compute motor power until traction current is identified.
+- Treat power derived from `6009` as an estimate until traction current is independently validated.
 - Do not label charger current as battery discharge or motor current.
 - Do not treat SOH `0` as 0 percent when observed data indicates unknown.
 - Do not infer `Off` from notification timeout alone.
