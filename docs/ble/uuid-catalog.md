@@ -79,7 +79,7 @@ The tables below use the short `XXXXXXXX` prefix.
 
 | Short UUID | Status | Purpose |
 | --- | --- | --- |
-| `00006001` | Observed | BMS status/fault capture. |
+| `00006001` | Validated | Positive and negative BMS fault masks. |
 | `00006002` | Observed | Battery firmware and serial information. |
 | `00006003` | Observed | Battery pack parameters. |
 | `00006004` | Validated | SOC, SOH, and DC bus. |
@@ -109,4 +109,3 @@ The tables below use the short `XXXXXXXX` prefix.
 | --- | --- | --- |
 | `00008100` | Observed | Lights telemetry TLV. |
 | `00008101` | Observed | Lights telemetry TLV configuration. |
-

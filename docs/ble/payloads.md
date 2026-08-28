@@ -169,6 +169,19 @@ Minimum length: 2 bytes. Optional fields appear when payload length reaches 4 or
 
 `dcBusVolts = dcBusRaw / 10`.
 
+## `6001` Battery Status
+
+Status: `Validated`
+
+Minimum length: 8 bytes. Observed payloads can include trailing reserved bytes, which should be tolerated.
+
+| Offset | Field | Type | Notes |
+| --- | --- | --- | --- |
+| 0 | `positiveFaultBits` | `UInt32` | Positive-side BMS fault mask; zero means no reported bits. |
+| 4 | `negativeFaultBits` | `UInt32` | Negative-side BMS fault mask; zero means no reported bits. |
+
+This payload is battery status, not state of health. SOH remains the `UInt16` at offset 2 of `6004`; an observed zero there must remain unknown rather than being inferred from these fault masks.
+
 ## `6005` Battery Temperatures
 
 Status: `Validated`
@@ -238,3 +251,5 @@ Required length: 16 bytes.
 | 0 | 8 temperature values | `UInt16[8]` | C x 10 |
 
 `0` means sensor unavailable in observed data. Physical labels for the eight positions are not validated.
+
+The little-endian layout, `0.1 C` scale, zero sentinel, and maximum-of-available-sensors presentation have been physically validated on a motorcycle. A displayed inverter maximum of `60 C` matched the decoded `7003` maximum. The individual physical component represented by each array position remains unknown, so positions must not receive component-specific labels yet.
