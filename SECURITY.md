@@ -17,5 +17,5 @@ If you find sensitive material in this repository, open a minimal issue that ide
 
 ## Research Boundary
 
-The documented BLE work is read-only telemetry research. Control commands, account flows, ownership transfer, payment, subscription, and firmware update paths are out of scope unless there is explicit authorization and a safe disclosure path.
+The repository documents telemetry and scoped configuration records with explicit evidence levels. A documented packet is not a general safe write API. Controlled write testing requires authorization, compatible hardware/firmware, preserved sibling values and fresh confirmation. Arbitrary configuration, safety-control, ownership transfer and firmware updates remain outside the documented write scope.
 

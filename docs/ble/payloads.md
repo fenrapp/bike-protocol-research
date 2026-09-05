@@ -61,7 +61,7 @@ Required length: 4 bytes.
 
 ## `2002` Live Throttle
 
-Status: `Observed`
+Status: `Validated` for the raw layout; physical units remain unvalidated.
 
 Required length: 6 bytes.
 
@@ -69,7 +69,7 @@ Required length: 6 bytes.
 | --- | --- | --- | --- |
 | 0 | `idFeedbackRaw` | `Int16` | Raw feedback. |
 | 2 | `iqFeedbackRaw` | `Int16` | Raw feedback. |
-| 4 | `positionRaw` | `Int16` | Raw throttle position candidate. |
+| 4 | `positionRaw` | `Int16` | Raw throttle position; no validated percent scale. |
 
 ## `2003` Live IMU
 
@@ -113,6 +113,27 @@ Required length: 16 bytes.
 
 `odometerKm = firstRawCounter / 100`.
 
+## `2006` Live Estimations
+
+Status: `Observed` layout; units and physical meanings remain unvalidated.
+
+Minimum length: 6 bytes.
+
+| Offset | Field | Type | Notes |
+| --- | --- | --- | --- |
+| 0 | range candidate | `UInt16` | Raw; no validated distance scale. |
+| 2 | time candidate | `UInt16` | Raw; no validated time scale. |
+| 4 | native motor-power candidate | `Int16` | Raw signed value; no validated watt scale. |
+
+Decoder fixtures establish the byte layout only. This is not an independently
+validated source of range, remaining ride time or measured motor power.
+
+## `4005` VCU Configuration
+
+The shared request/response channel carries base maps, charging settings, bike
+lock and traction records. See [VCU configuration](configuration.md) for layouts,
+firmware gates and the separate evidence level of each operation.
+
 ## `4100` VCU Telemetry TLV
 
 Status: `Partly validated`
@@ -154,6 +175,20 @@ Required length: 19 bytes.
 | 18 | `typeRaw` | `UInt8` | Raw charger type. |
 
 This is charger current. It is not traction current.
+
+## `6003` Battery Parameters
+
+Status: `Observed` layout.
+
+Minimum length: 4 bytes.
+
+| Offset | Field | Type | Notes |
+| --- | --- | --- | --- |
+| 0 | series count | `UInt8` | Pack topology field. |
+| 1 | parallel count | `UInt8` | Pack topology field. |
+| 2 | capacity | `UInt16` | Raw; physical scale is unvalidated. |
+
+Do not turn raw capacity into Ah or Wh without independent pack evidence.
 
 ## `6004` Battery SOC/SOH/DC Bus
 

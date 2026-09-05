@@ -10,11 +10,18 @@ This file lists what should not be treated as product-ready.
 | Instant power | `6004` x `6009` candidate | Inferred | Validate the current scale before presenting the result as measured power. |
 | BMS voltage candidates | `6009` offsets 0 and 8 | Inferred | Compare with simultaneous sums of `6007` cell groups `0...49` and `50...99`. |
 | Trip counters | `2005` | Partly validated | Compare all four counters against known ride/reset states. |
-| Range/time/power estimate | `2006` | Unknown | Capture at different SOC levels and compare with displayed range/time. |
+| Range/time/power estimate | `2006` | Observed six-byte layout, units unknown | Compare raw fields with independent distance/time/power references. |
 | Racing/mode metadata | `2007` | Unknown | Capture while changing configured maps and racing modes. |
 | Inverter temperature labels | `7003` | Values validated, labels unknown | Thermal comparison or trusted component mapping. |
 | VCU inputs | `4002`, `4100` | Partly known | Capture brake, start, kill, pump, fan, and map switch changes independently. |
-| Lock/control state | `1002` and unknown writes | Unknown | Do not implement without authorization and a safety process. |
+| Lock configuration | `4005` type `5`, `1002` | Observed layout and guarded implementation | Capture exact no-op, both state changes, fresh read-back and status telemetry with firmware inventory. |
+| Traction configuration | `4005` type `8` | Reads observed; corrected write lacks instrumented success evidence | Capture mode `0x0F`, zero write status and exact fresh read of both signed tenths values. |
+| Pack capacity | `6003` | Raw layout observed | Confirm capacity scale against a known pack; do not infer Ah or Wh. |
+| IMU axes and scale | `2003` | Raw six-axis layout observed | Measure mounting axes, gravity magnitude, gyro scale and cadence before deriving riding angles. |
+
+Charging controls and base-map writes have separate physical evidence in
+[VCU configuration](configuration.md). This does not validate arbitrary curves,
+other configuration types or all firmware versions.
 
 ## Validation Checklist
 

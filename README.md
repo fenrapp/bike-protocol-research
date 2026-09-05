@@ -1,6 +1,6 @@
 # VCU BLE Protocol Research
 
-Unofficial interoperability notes for read-only BLE telemetry and related data flows.
+Unofficial interoperability notes for BLE telemetry, authentication and scoped configuration records.
 
 This repository is a public research notebook, not a product SDK. It documents what has been validated from observed behavior, open-source prior art, controlled BLE captures, and clean-room implementation work. The goal is to help builders understand the protocol surface without redistributing proprietary code, credentials, or private captures.
 
@@ -12,7 +12,7 @@ This repository is a public research notebook, not a product SDK. It documents w
 | BLE authentication flow | Observed | App-level challenge-response on `00001001` is required before protected telemetry. |
 | Core telemetry payloads | Partly validated | Several ride, battery, charger, inverter, and status payloads are decoded. |
 | Cloud endpoints | Observed | Internal authenticated endpoints are listed only as research context. |
-| Control commands | Unknown | No lock, unlock, power, mode-write, or configuration command is documented as safe or validated. |
+| Configuration records | Mixed evidence | Charging power/target and base-map changes have physical evidence. Traction and lock layouts are documented separately from pending instrumented write/read-back evidence. See [VCU configuration](docs/ble/configuration.md). |
 
 ## Testing Gotcha
 
@@ -24,14 +24,16 @@ The VCU only accepts one active BLE client connection. If another client is alre
 - [UUID catalog](docs/ble/uuid-catalog.md)
 - [Authentication](docs/ble/authentication.md)
 - [Payload layouts](docs/ble/payloads.md)
+- [VCU configuration and write evidence](docs/ble/configuration.md)
 - [Unknowns and validation checklist](docs/ble/unknowns.md)
 - [Cloud endpoint inventory](docs/cloud/endpoints.md)
 - [Telemetry model notes](docs/data/telemetry-model.md)
+- [GPS, IMU, and inclinometer feasibility](docs/data/gps-imu-inclinometer.md)
 - [Open-source references](docs/references/open-source-projects.md)
 
 ## Safety Rules ⚠️
 
-- Read-only telemetry only.
+- This repository contains documentation, not an executable vehicle client. Documented configuration records do not establish a general safe write surface.
 - Do not write control, lock, unlock, mode, charging, or configuration characteristics.
 - Do not publish bearer tokens, Bluetooth keys, nonce values, challenge responses, private VINs, or raw captures that identify a vehicle or account.
 - Treat all cloud endpoints as internal and unstable.
