@@ -39,11 +39,11 @@ The tables below use the short `XXXXXXXX` prefix.
 | Short UUID | Status | Purpose |
 | --- | --- | --- |
 | `00002001` | Validated | Speed and motor RPM. |
-| `00002002` | Observed | Throttle and current feedback values. |
+| `00002002` | Validated layout | Raw throttle and current feedback; physical scales remain unvalidated. |
 | `00002003` | Observed | IMU acceleration and gyroscope values. |
 | `00002004` | Validated | Active map index. |
 | `00002005` | Partly validated | Four counters; first is odometer in centi-kilometers. |
-| `00002006` | Unknown | Estimation candidate: range, time, or power. |
+| `00002006` | Observed layout | Raw range/time and signed motor-power candidates; units remain unvalidated. |
 | `00002007` | Unknown | Racing/category/mode candidate. |
 | `00002008` | Observed | Live configuration. |
 | `00002100` | Observed | Live telemetry TLV. |
@@ -64,7 +64,7 @@ The tables below use the short `XXXXXXXX` prefix.
 | --- | --- | --- |
 | `00004001` | Observed | VCU versions and serials. |
 | `00004002` | Unknown | VCU information. |
-| `00004005` | Observed | Bike configuration. |
+| `00004005` | Mixed evidence | Base maps, charger, lock and traction records; see [configuration evidence](configuration.md). |
 | `00004100` | Partly validated | VCU telemetry TLV; brake activity decoded for frames with header `05 0F`. |
 
 ## Charger Service `00005000`

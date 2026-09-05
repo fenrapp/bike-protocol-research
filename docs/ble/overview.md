@@ -66,4 +66,5 @@ Battery/charging health:
 
 ## Safety Boundary
 
-This repository documents read-only interoperability. Do not write to vehicle control, configuration, lock, unlock, charging, firmware, or ownership-related paths from community tools unless you have explicit authorization and a validated safety process.
+This repository documents telemetry interoperability and scoped configuration findings.
+See [VCU configuration](configuration.md) for per-record evidence and firmware gates. Do not write to vehicle control, configuration, lock, unlock, charging, firmware, or ownership-related paths from community tools unless you have explicit authorization and a validated safety process.
