@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/fenrapp/fenr-web-app/main/public/assets/favicon-rounded.png" width="64" height="64" alt="FENR logo">
+</p>
+
 # VCU BLE Protocol Research
 
 Unofficial interoperability notes for BLE telemetry, authentication and scoped configuration records.
