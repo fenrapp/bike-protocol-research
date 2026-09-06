@@ -45,3 +45,10 @@ Sanitized bytes: <redacted or synthetic unless safe>
 
 Keep writing plain and useful. Avoid hype, speculation, and claims that make private interfaces look official or stable.
 
+## Contribution License
+
+By submitting an original contribution, you agree to provide it under the
+[MIT License](LICENSE). Only submit material you have the right to license, and
+identify external references without copying third-party code or documentation
+whose terms conflict with this license. Previously published CC0 material keeps
+its existing permissions as described in the [README](README.md#license).
