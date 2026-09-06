@@ -41,16 +41,9 @@ The VCU only accepts one active BLE client connection. If another client is alre
 
 ## License
 
-The default license for original documentation and code contributions is the
+The original documentation and code in this repository are released under the
 [MIT License](LICENSE). It permits reuse, modification, redistribution, and
 commercial use while requiring preservation of the copyright and license notice.
-
-Material published through commit
-[`dd97e43`](https://github.com/fenrapp/bike-protocol-research/tree/dd97e4365b75faffef20cfbde4b41141ed2a112e)
-remains available under [CC0 1.0 Universal](LICENSES/CC0-1.0.txt). That dedication
-is irrevocable: this change does not withdraw existing CC0 permissions or impose
-MIT conditions on that material. MIT applies to new copyrightable contributions
-from this change onward.
 
 Referenced third-party projects retain their own licenses. The repository's
 license covers our original contributions, not third-party code, trademarks,
